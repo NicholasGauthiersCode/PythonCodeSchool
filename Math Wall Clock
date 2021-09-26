@@ -1,0 +1,14 @@
+from math import *
+
+print((((fabs(cos(3 * pi))), "o'clock")))    # 1 o'clock
+print(((14 // 3) - (372 % 10)), "o'clock")  # 2 o'clock
+print((sqrt(sin((1 / 2) * pi) * 9)), "o'clock") # 3 o'clock
+print((4 * (cos((1 / 4) * pi) * (2 / sqrt(2)))), "o'clock") # 4 o'clock
+print(((((tan(1 / 6) * pi)) * ((36 * sqrt(3)) / 6)) // 1), "o'clock")   # 5 o'clock
+print((exp(log(6))), "o'clock")     # 6 o'clock
+print((fabs(51 - 100) / 7), "o'clock")      # 7 o'clock
+print((factorial(3) + 2), "o'clock")    # 8 o'clock
+print((3 ** 3 / 3), "o'clock")      # 9 o'clock
+print(((sqrt(16) + 1) * 2), "o'clock")      # 10 o'clock
+print((log(10, 10) + 2 * 5), "o'clock")     # 11 o'clock
+print((((sqrt(36) * 8)) / 4), "o'clock")       # 12 o'clock
