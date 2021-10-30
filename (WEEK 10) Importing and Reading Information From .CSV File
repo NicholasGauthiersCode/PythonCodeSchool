@@ -1,0 +1,54 @@
+import pandas as pd
+import csv
+
+# This is the code importing the excel file, lets hope it works for yall
+
+weather = pd.read_csv('WeatherDataWindows.csv')
+
+# These are the things that we were given
+
+tempmax = weather['Temp High'].max()
+tempmin = weather['Temp High'].min()
+print("These Are the Maximum and Minimum Temperatures Over The Three Years!")
+print("The Temp High at Coulter Field was", tempmax, 'Degrees')
+print("The Temp Low at Coulter Field was", tempmin, 'Degrees')
+
+rainavg = weather['Precipitation (in.)'].mean()
+print('\nThis is the Average Amount of Rain Over the 3 Year Period!')
+print('The Average Amount of Rain Over the 3 Year Period at Coulter Field Was', "{:.5}".format(rainavg), 'Inches'
+                                                                                            '(rounded to 5 places)')
+
+# MY CHOICE 1
+# Here the code is finding and showing the average temperature of every April 20 recorded in the .csv file
+
+print('\nThe Average Temperature for Every April 20 at Coulter Field is Shown Below:')
+# Year 2015
+finder = weather.loc[110]
+print('2015:', end=' ')
+print(finder['Temp Avg'], 'Degrees Fahrenheit')
+# Year 2016
+finder2 = weather.loc[475]
+print('2016:', end=' ')
+print(finder2['Temp Avg'], 'Degrees Fahrenheit')
+# Year 2017
+finder3 = weather.loc[840] # 2017
+print('2017:', end=' ')
+print(finder3['Temp Avg'], 'Degrees Fahrenheit')
+print("Man... 2017's Temperature was High!")
+
+# MY CHOICE 2
+# Standard Deviation and Mean For Precipitation Levels
+
+rainmean = weather['Precipitation (in.)'].mean()
+raindevi = weather['Precipitation (in.)'].std()
+
+print("\nThe Standard Deviation for the Precipitation Levels is", "{:.5}".format(raindevi), 'in. (rounded to 5 places)')
+print("The Mean of the Precipitation Levels is", "{:.5}".format((rainmean)), 'in. (rounded to 5 places)')
+
+# MY CHOICE 3
+# THE AVERAGE TEMPERATURE OVER ALL 3 YEARS
+
+fullavg = weather['Temp Avg'].mean()
+print("\nThis is The Average Temperature Over All 3 Years!")
+print("{:.3}".format(fullavg), 'Degrees Fahrenheit')
+print("Geez! Texas is warm!")
