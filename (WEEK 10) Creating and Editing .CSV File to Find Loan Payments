@@ -1,0 +1,95 @@
+from csv import writer
+
+# VARIABLES ==========================================================================================================
+
+# variable to make the program work
+months = 1
+loanpaymentleft = 1
+interestaccrued = 0
+totalinterest = 0
+list = []
+
+# INPUTS===============================================================================================================
+
+# all the user inputs
+
+print("Please enter your loan amount (cents can be added if needed):", end=' ')
+loanamount = float(input())
+print("Please enter your annual interest rate percentage:", end=' ')
+interest = float(input())
+print("Please enter how much you are paying off each month (cents can be added if necessary):", end=' ')
+loandel = float(input())
+print("Please enter the name you want your file to be:", end=' ')
+name = str(input())
+name = name + '.csv'
+
+# to turn percentage to the decimal format to work with
+interest = interest / 100
+
+intro = ['MONTHS', "AMOUNT LEFT", "TOTAL INTEREST PAYED"]
+listmonth0 = ['Month 0', ' $' + str(loanamount), ' $0']
+
+
+# just in case the .csv file has been used previously it deletes everything from it so that you wont
+# have a lot of cluttered and useless numbers
+
+f = open(name, 'w')
+f.truncate()
+f.close()
+
+# this is a little spiel to get the header and the first month of numbers into the .csv file
+
+with open(name, 'a', newline='') as file:
+    writer_object = writer(file)
+    writer_object.writerow(intro)
+    writer_object.writerow(listmonth0)
+    file.close()
+
+# LOOPS ==============================================================================================================
+
+# this is the while loop that runs the entire program more or less its just a fancy counter in this program
+
+while months <= 31:
+    if months < 31:
+
+        # the list gets reset everytime the while loop runs through so that the .csv file will go down
+        # and not across
+
+        list = []
+
+        # all the math needed to get the numbers we want
+
+        apr = interest * (1 / 12)
+        loanamount = loanamount - loandel
+        loanpercentadded = loanamount * apr
+        totalinterest = totalinterest + loanpercentadded
+        loanamount = loanamount + loanpercentadded
+
+
+        # this if statement is only used if the loan gets payed off, or in this programs mind, the
+        # amount left is 0 or less than 0
+
+        if loanamount <= 0:
+            loanamount = 'PAYED OFF'
+            list = ['Month ' + str(months), loanamount, ' $' + str("{:.2f}".format(totalinterest))]
+            with open(name, 'a', newline='') as file:
+                writer_object = writer(file)
+                writer_object.writerow(list)
+                file.close()
+            break
+        else:
+            pass
+
+        list = ['Month ' + str(months), ' $' + str("{:.2f}".format(loanamount)), ' $' + str("{:.2f}".format(totalinterest))]
+
+        # this is the .csv file writer that puts all the information we want into the excel sheet
+
+        with open(name, 'a', newline='') as file:
+            writer_object = writer(file)
+            writer_object.writerow(list)
+            file.close()
+        months += 1
+
+    elif months > 30:
+        print("\nTHE CALCULATIONS ARE FINISHED PLEASE REFER TO THE EXCEL SHEET FOUND WHERE EVER YOU SAVE THIS .py FILE")
+        break
