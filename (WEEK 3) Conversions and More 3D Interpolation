@@ -1,0 +1,101 @@
+from math import *
+
+print("ACTIVITY 1")
+
+print("\nType a number to convert from pounds to newtons")
+xa = float(input())
+PoundsToNewtons = xa * 4.44822162
+print(xa, "pounds is equivalent to", '{:.2f}'.format(PoundsToNewtons), "Newtons")
+print("------------------------------------------------------")
+
+print("\nType a number to convert from kilometers to miles")
+xb = float(input())
+KilometerToMile = xb * 0.621371
+print(xb, "Kilometers is equal to", '{:.2f}'.format(KilometerToMile), "miles")    # CONVERSIONS
+print("------------------------------------------------------")
+
+print("\nType a number to convert seconds per revolution to Hertz")
+xc = float(input())
+SprToHz = xc
+print(xc, "Seconds per revolutions is equal to", '{:.2f}'.format(SprToHz), "Hz")
+print("------------------------------------------------------")
+
+print("\nType a number to convert miles per hour to kilometers per hour")
+xd = float(input())
+MphToKmh = xd * 1.609344
+print(xd, "miles per hour is equal to", '{:.2f}'.format(MphToKmh), "kilometers per hour")
+print("------------------------------------------------------")
+
+print("\nType a number to convert from Liters per second to Gallons per minutes")
+xe = float(input())
+LpsToGps = (xe * 15.8503 * 60)
+print(xe, "Liters per seconds is equal to", '{:.2f}'.format(LpsToGps), "Gallons per minutes")
+print("------------------------------------------------------")
+
+print("\nType a number to convert from degrees Celsius to degrees Fahrenheit")
+xf = float(input())
+CelciusToFarenheit = (xf * (9/5) + 32)
+print(xf, "degrees Celsius is equal to",  '{:.2f}'.format(CelciusToFarenheit), "degrees Fahrenheit")
+print("------------------------------------------------------")
+
+print("\nACTIVITY 2")
+
+
+
+# equation for interpolation on a 3d model
+
+
+# Setting up for the user to be able to input all the variables
+print("Enter time at 1:")
+t1 = int(input())
+print("Enter the x position of the object of time 1:")
+x1 = float(input())
+print("Enter the y postition on the object at time 1:")
+y1 = float(input())
+print("Enter the z postition of the object at time 1:")
+z1 = float(input())
+print("Enter the time at 2:")
+t2 = int(input())
+print("Enter the x position of the object of time 2:")
+x2 = float(input())
+print("Enter the y postition on the object at time 2:")
+y2 = float(input())
+print("Enter the z postition of the object at time 2:")
+z2 = float(input())
+
+EvenlySpacedInterval = (t2 - t1) / 5
+
+# Setting up the evenly spaced interval using ((y2 - y1) / 5))
+tprime1 = (t1 + EvenlySpacedInterval)
+tprime2 = t2 + (2 * EvenlySpacedInterval)
+tprime3 = t1 + (3 * EvenlySpacedInterval)
+tprime4 = t1 + (4 * EvenlySpacedInterval)
+tprime5 = t1 + (5 * EvenlySpacedInterval)
+
+# These are all the equations for 3d interpolation
+
+xprime1 = (x1 + (tprime1 - t1) * ((x2 - x1) / (t2 - t1)))
+yprime1 = (y1 + (tprime1 - t1) * ((y2 -y1) / (t2 - t1)))
+zprime1 = (z1 + (tprime1 - t1) * ((z2 - z1) / (t2 - t1)))
+
+xprime2 = (x1 + (tprime2 - t1) * ((x2 - x1) / (t2 - t1)))
+yprime2 = (y1 + (tprime2 - t1) * ((y2 -y1) / (t2 - t1)))
+zprime2 = (z1 + (tprime2 - t1) * ((z2 - z1) / (t2 - t1)))
+
+xprime3 = (x1 + (tprime3 - t1) * ((x2 - x1) / (t2 - t1)))
+yprime3 = (y1 + (tprime3 - t1) * ((y2 -y1) / (t2 - t1)))
+zprime3 = (z1 + (tprime3 - t1) * ((z2 - z1) / (t2 - t1)))
+
+xprime4 = (x1 + (tprime4 - t1) * ((x2 - x1) / (t2 - t1)))
+yprime4 = (y1 + (tprime4 - t1) * ((y2 -y1) / (t2 - t1)))
+zprime4 = (z1 + (tprime4 - t1) * ((z2 - z1) / (t2 - t1)))
+
+xprime5 = (x1 + (tprime5 - t1) * ((x2 - x1) / (t2 - t1)))
+yprime5 = (y1 + (tprime5 - t1) * ((y2 -y1) / (t2 - t1)))
+zprime5 = (z1 + (tprime5 - t1) * ((z2 - z1) / (t2 - t1)))
+
+print("At time", tprime1, "seconds the object is at (", xprime1,",",yprime1,",",zprime1,")")
+print("At time", tprime2, "seconds the object is at (", xprime2,",",yprime2,",",zprime2,")")
+print("At time", tprime3, "seconds the object is at (", xprime3,",",yprime3,",",zprime3,")")
+print("At time", tprime4, "seconds the object is at (", xprime4,",",yprime4,",",zprime4,")")
+print("At time", tprime5, "seconds the object is at (", xprime5,",",yprime5,",",zprime5,")")
