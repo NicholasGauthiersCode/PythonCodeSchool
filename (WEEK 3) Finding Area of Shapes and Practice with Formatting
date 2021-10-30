@@ -1,0 +1,48 @@
+from math import *
+
+# ACTIVITY 1
+
+# These are all of the equations that were created by using some simple algebra on the original area equations
+
+def AreaOfCircle(x):
+  return sqrt(x / pi)
+
+def AreaOfTriangle(x):
+    return (sqrt((x) / (sqrt(3) / 4)))
+
+def AreaOfSquare(x):
+    return (sqrt(x))
+
+def AreaOfPentagon(x):
+    return (sqrt((x) / ((1 / 4) * sqrt(5 * (5 + (2 * sqrt(5)))))))
+
+def AreaOfDodecagon(x):
+    return (sqrt((x) / (3 * (2 + sqrt(3)))))
+
+print("ACTIVITY 1")
+print("Please Enter A Value For Area (decimals can be used)")
+
+# This is storing the number that is inputted by the user so that it can be used across all the equations
+
+x = float(input())
+
+print("A circle with area", '{:.2f}'.format(x) , "m^2 has a radius of", '{:.3f}'.format(AreaOfCircle(x)))
+print("An equilateral triangle with the area", '{:.2f}'.format(x), "m^2 has a side length of", '{:.3f}'.format(AreaOfTriangle(x)), "m")
+print("A square with the area", '{:.2f}'.format(x), "m^2 has a side length of", '{:.3f}'.format(AreaOfSquare(x)), "m")
+print("A pentagon with an area of", '{:.2f}'.format(x), "m^2 has a side length of", '{:.3f}'.format(AreaOfPentagon(x)), "m")
+print("A dodecagon with an area of", '{:.2f}'.format(x), "m^2 has a side length of", '{:.3f}'.format(AreaOfDodecagon(x)), "m")
+
+# ACTIVITY 2
+
+print("\nACTIVITY 2")
+print("Please enter the numbers of digits of precision for pi:")
+
+# Useing the precise function you can make pi round to the number you want
+
+HowPrecise = int(input())
+
+def PiToNum(FloatNumber, Precision):
+    return "%0.*f" % (Precision, FloatNumber)
+
+# inputting pi and the how precise number gotten from the user input and inserted into the def function you can get the amount of precision you want
+print("The value of pi to", HowPrecise, 'digits is', PiToNum(pi, HowPrecise))
