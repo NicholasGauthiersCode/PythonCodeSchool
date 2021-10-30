@@ -1,0 +1,28 @@
+from math import *
+# PART 1
+
+print("Enter Value for X Between 10 minutes and 55 minutes")
+
+x1 = 10
+x2 = 55
+y1 = 2025
+y2 = 23025
+x = float(input())
+
+print("part 1\n")
+
+print((y1 + (x - x1) * ((y2 - y1) / (x2 - x1))), "km past houston") # using linear interpolation to find the y value depending on the x value the user inputs
+
+# PART 2
+
+print("\nPART 2\n")
+radius = 6745
+
+iss_distance = float((y1 + (x - x1) * ((y2 - y1) / (x2 - x1)))) # using inear interpolation find how far around the International Space Station is from houston.
+
+circumference = ((2 * pi * radius))
+
+while iss_distance >= circumference:
+    iss_distance = iss_distance - circumference
+
+print(iss_distance, "km from Houston")
