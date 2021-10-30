@@ -1,0 +1,94 @@
+from math import *
+
+print("The question: \n At any given minute what are the coordinates of a satellite located on a 3d plane?\n")
+
+print('\nPART 1')
+t0_amount = int(input("Please enter a amount between 12 and 85")
+
+x1 = 2
+x2 = 25
+y1 = 4
+y2 = -5
+z1 = 7
+z2 = 11
+t1 = 12
+t2 = 85
+t0 = float(input())
+
+print('\033[0m' + "\nWhere will the satellite be at", t0, "seconds?")
+
+# equation for interpolation on a 3d model
+x0 = (x1 + (t0 - t1) * ((x2 - x1) / (t2 - t1)))
+y0 = (y1 + (t0 - t1) * ((y2 -y1) / (t2 - t1)))    # FINDING THE LOCATIONS ON A GRAPH DEPENDING ON THE INPUT FROM THE USER
+z0 = (z1 + (t0 - t1) * ((z2 - z1) / (t2 - t1)))
+
+print("\nPART 1\n")
+print("At time", t0, "seconds:")
+print ("x0 =", x0, "m")
+print("y0 =", y0, "m")
+print("z0 =", z0, "m")
+
+print("\nPART 2\n")
+
+print("At time 45 seconds:")
+print("x0 =", ((x1 + (45 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (45 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (45 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 46 seconds:")
+print("x0 =", ((x1 + (46 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (46 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (46 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 47 seconds:")
+print("x0 =", ((x1 + (47 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (47 - t1) * ((y2 -y1) / (t2 - t1)))), "m")     # FINDING THE LOCATION ON A GRAPH OVER A 5 SECOND INTERVAL
+print("z0 =", ((z1 + (47 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 48 seconds:")
+print("x0 =", ((x1 + (48 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (48 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (48 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 49 seconds:")
+print("x0 =", ((x1 + (49 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (49 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (49 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("\nPART 3\n")
+
+print("At time 30 seconds:")
+print("x0 =", ((x1 + (30 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (30 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (30 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 37.5 seconds:")
+print("x0 =", ((x1 + (37.5 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (37.5 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (37.5 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 45 seconds:")
+print("x0 =", ((x1 + (45 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (45 - t1) * ((y2 -y1) / (t2 - t1)))), "m")     # FINDING THE LOACTION ON A GRAPH OVER 5 EVEN INTERVALS OVER 30 SECONDS
+print("z0 =", ((z1 + (45 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 52.5 seconds:")
+print("x0 =", ((x1 + (52.5 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (52.5 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (52.5 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+
+print("At time 60 seconds:")
+print("x0 =", ((x1 + (60 - t1) * ((x2 - x1) / (t2 - t1)))), "m")
+print("y0 =", ((y1 + (60 - t1) * ((y2 -y1) / (t2 - t1)))), "m")
+print("z0 =", ((z1 + (60 - t1) * ((z2 - z1) / (t2 - t1)))), "m")
+print("----------------------------")
+print("END OF CODE")
