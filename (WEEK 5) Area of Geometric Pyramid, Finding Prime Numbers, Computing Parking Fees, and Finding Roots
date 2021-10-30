@@ -1,0 +1,168 @@
+import math
+from math import *
+import sys
+import cmath
+
+# Activity 1 part A
+
+# This is where the user inputs the height of the pyramid and th1e side lengths of the blocks
+print("A ruler needs your help covering his pyramid in gold foil! \nPlease use the program to help calulate how much he will need!")
+print("\nPlease enter how many blocks tall the pyramid is:", end=" ")
+layers = int(input())
+print("Please enter the side lengths of the blocks in meters:", end=' ')
+sidelength = float(input())
+sum = 0
+
+# This equation below is finding the area of the pyramid from a top down view
+
+totalarea = (layers ) ** 2
+
+# this while loop will take the number the user inputted for layers and run it through this equation to find the side
+# area over and over until it is 0
+
+while layers > 0:
+    layerssum = 4 * ((sidelength ** 2) * layers)
+    layers = layers - 1
+    sum = sum + layerssum # this sum = sum + layersum will take the output from the while loop and add it up so
+                          # that it can be easily printed
+# here is the final equation to add up the
+totalsum = sum + totalarea
+print("\nYou need", '{:.2f}'.format(totalsum), "square meters of gold to cover that pyramid.")
+print("Thanks for helping the ruler!")
+
+# Activity 1 part B
+
+print("\nThe ruler needs your help again! Please use this program to caluclate the amount of gold needed!")
+
+print("Please enter how many blocks tall the pyramid is:", end=' ')
+arith_layer = int(input())
+print("Please enter the side lengths of the blocks in meters", end=' ')
+arith_side = int(input())
+
+# here the program is doing the same equation as the first activity, though it is only using a simple equation
+# to do it
+
+pyramidarea = (((arith_layer / 2) * ((2 * 1) + (arith_layer - 1)) * 4) * (arith_side ** 2)) + (arith_layer ** 2)
+
+
+print('\nYou need', '{:0.2f}'.format(pyramidarea), 'square meters of gold to cover that pyramid.')
+print("Thanks for helping the ruler once again!")
+
+
+# Activity 2
+
+count = 0
+# this print statement and input are used for literally nothing they are only there for the user experience
+print("\nPlease type anything to start the program:", end=' ')
+v = input()
+
+print("Finding prime numbers between 2 and 100")
+for number in range(2, 100):
+    for f in range(2, number):
+        if number % f == 0:
+            print(number, 'is not a prime number.')
+            break
+    else:
+        print(number, 'is a prime number')
+        count += 1
+
+
+# Activity 3
+
+print("\nEnter the hours parked as a decimal number. Include a negative sign if the ticket is lost.")
+print("Please enter the hours parked:", end=' ')
+
+# These are all of the variable used through the code
+
+hoursold = float(input())
+# this .ceil function is used to round the number up to make my day easier
+hours = math.ceil(hoursold)
+days = 0
+dayspay = 0
+extramoney = 0
+
+# there is a big if statement that runs through the entire program for if the number inputted is positive or negative
+
+if hours > 0:
+# this if statemnt is used if the time inputted is greater than 24 and it runs a while loop to be able to get how many
+# days were spent parked
+    if hours < 24:
+        dayspay = 0
+    elif hours >= 24:
+# this while loops takes the amount of hours spent and subtracts it by 24 (hours in a day) and adds 1 to a day counter
+# this day counter is used in the end of the while loop to be able to determine how much money is needed to be spent
+# for the total days there
+        while hours >= 24:
+            hours = hours -24
+            days += 1
+        dayspay = days * 24
+
+# this extra time statement is used to be able to find the amount of left over hours from the total inputted to be able
+# to determine the extra money needed to be added in the end
+    extratime = hours % 24
+    if (extratime > 0) and (extratime <= 2):
+        extramoney = 4
+    elif (extratime > 2) and (extratime <= 4):
+        extramoney = 7
+    elif (extratime > 4) and (extratime < 24):
+        extramoney = 7 + (extratime - 4)
+    if extramoney > 24:
+        extramoney = 24
+    else:
+        pass
+# this is the loops that are used for the negative numbers, but, they are the exact same code more or less
+elif hours < 0:
+# The only thing different about the positive and negative code is this little code down below.
+# This line turns the code back to positive so that all the code can run smoothly aganin
+    hours = hours * -1
+    if hours < 24:
+        dayspay = 0
+    elif hours >= 24:
+        while hours >= 24:
+            hours = hours -24
+            days += 1
+        dayspay = days * 24
+
+    extratime = hours % 24
+    if (extratime > 0) and (extratime <= 2):
+        extramoney = 4
+    elif (extratime > 2) and (extratime <= 4):
+        extramoney = 7
+    elif (extratime > 4) and (extratime < 24):
+        extramoney = 7 + (extratime - 4)
+    if extramoney > 24:
+        extramoney = 24
+    extramoney = extramoney + 36
+
+# Here all the totals are added and the total amount is spit out
+
+totalpay = extramoney + dayspay
+print("Parking for", hoursold, ' hours costs $' + str(totalpay))
+
+
+# Activity 4
+
+# user will input the number values of coefficient A,B,and C
+A = int(input("\nEnter a value for the coefficient A:"))
+B = int(input("Enter a value for the coefficient B:"))
+C = int(input("Enter a value for the coefficient C:"))
+
+# When A= 0 the program will tell the user to input a different value because you can divide by zero
+if A == 0:
+   sys.exit("please enter a number that is not 0")
+else:
+   pass
+# Lets the user know what 0j means
+print("\nj represents imaginary numbers")
+print("If answer has 0j, it means there are no imaginary numbers")
+# quadratic equation when -B is added or subtracted from the rest of the equation
+X1 = ((-B) + (cmath.sqrt((B*2)-4*A*C)))/(2*A)
+X2 = ((-B) - (cmath.sqrt((B*2)-4*A*C)))/(2*A)
+
+# When only one x value is found it only prints one "x=" statement when there is two it prints out both.
+# Every x value is rounded with one decimal place
+if X1 == X2:
+   print("The root is {:.1f}".format(X2))
+elif X1 != X2:
+   print("The roots are x= {:.1f} and x =".format(X1), end=" ")
+   print(("{:.1f}") . format(X2))
