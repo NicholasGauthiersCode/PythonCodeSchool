@@ -1,0 +1,1285 @@
+import sys
+from math import *
+
+# This code is very chunky, unnecessarily chunky. The reason is that we thought all of the points were different between
+# male and female. This caused the code to be about 40% bigger than need be. We know that it is too big, but it was
+# too late by the time we noticed.
+# It still all works, just a little big.
+
+print("Please enter sex. (M/F)")
+
+# Here is the program taking an input from the user and either letting it pass and move on to the next question, or
+# having the program restart if something incorrect is typed.
+
+(gender) = str(input())
+if gender == ("M"):
+    pass
+elif gender == ("F"):
+    pass
+else:
+    sys.exit("Please restart the program and answer either M or F")
+
+# Here the program is taking an input the from user and if it is below 20 then the program is stopped
+# and restarted
+
+print("Please enter age. (20 years and over):")
+age = float(input())
+if (age < 20):
+    sys.exit("Please restart the program and enter an age 20 or over")
+
+# Here is the program asking for cholestrol levels
+
+print("Please enter Cholesterol levels (mg/dL):")
+cholesterol = float(input())
+
+# Here the program is asking a yes or no question and if yes or no aren't answered then the program is restarted
+
+print("Do you smoke? YES or NO")
+smoke = (input())
+if smoke == (("YES")):
+    pass
+elif smoke == ("NO"):
+    pass
+else:
+    sys.exit("Please restart the program and type YES or NO")
+
+# Here the program is asking for HDL
+
+print("Please enter your HDL cholesterol (mg/dL):")
+HDL = float(input())
+
+# Here the program is asking for systolic blood pressure
+
+print("Please enter Systolic BP (mmHg):")
+SysBP = float(input())
+
+# Here the program is asking a yes or no question and if it isn't answered correctly, the program restarts
+
+print("Have you had your Systolic BP treated? (YES or NO):")
+SysBPTreated = (input())
+if SysBPTreated == (("YES")):
+    pass
+elif SysBPTreated == ("NO"):
+    pass
+else:
+    sys.exit("Please restart your program and enter an answer YES or NO")
+
+# The program runs off of one main if else statment that starts the branches off for all of the other questions.
+# Most of the program is very similar with some slight changes to numbers but that is what the project needed.
+# In this first if else statement it is asking the main question Male or Female which will then lead off to all
+# of the branches after it.
+
+if gender == ('M'):
+
+# After gender is asked for the program will then go to a set of if else statements to figure out age.
+
+    if (age >= 20) and (age <= 34):
+        agepoints = -9
+# Once age is figured out then everything else can be obtained, so this is the 'innermost' if else statement.
+# In this statement cholesterol levels are taken and depending on the age spit out a number of cholesterol points
+# That will be used in the end to calculate the percent chance of heart attacks
+
+# CHOLESTEROL
+
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 4
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 7
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 9
+        elif (cholesterol >= 280):
+            chol_points = 11
+        else:
+            print("please enter a number that works")
+# All of these if else statements are very similar to one another so this one takes an input from the user and creates
+# A number for Smoke Points that will be used later in the program
+
+# SMOKING
+
+        if smoke == ("YES"):
+            smokepoints = 8
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# Similar to the cholestoral question the program takes the number you inputted and gives a number to be added to
+# HDL points, that come into play near the end
+
+# HDL
+
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+
+# Systolic BP take two inputs from the user to create a answer that gets outputted as SysBP_points
+# To do this the user first inputs the actual number and then inputs whether they have been treated for their
+
+# Systolic BP
+
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+
+    # ------------------------------------------------------------------------------------------------
+# Here the program restarts and all of the other if else statements run through the same exact set of problems, all
+# with different ages, genders, etc
+    elif (age >= 35) and (age <= 39):
+        agepoints = -4
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 4
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 7
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 9
+        elif (cholesterol >= 280):
+            chol_points = 11
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 8
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 40) and (age <= 44):
+        agepoints = 0
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 3
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 5
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 6
+        elif (cholesterol >= 280):
+            chol_points = 8
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 5
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 45) and (age <= 49):
+        agepoints = 3
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 3
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 5
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 6
+        elif (cholesterol >= 280):
+            chol_points = 8
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 5
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 50) and (age <= 54):
+        agepoints = 6
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 2
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 3
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 4
+        elif (cholesterol >= 280):
+            chol_points = 5
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 3
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 55) and (age <= 59):
+        agepoints = 8
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 2
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 3
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 4
+        elif (cholesterol >= 280):
+            chol_points = 5
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 3
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 60) and (age <= 64):
+        agepoints = 10
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 1
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 2
+        elif (cholesterol >= 280):
+            chol_points = 3
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == "YES"):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == "NO"):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 65) and (age <= 69):
+        agepoints = 11
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 1
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 2
+        elif (cholesterol >= 280):
+            chol_points = 3
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBp <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 70) and (age <= 74):
+        agepoints = 12
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 0
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 0
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 1
+        elif (cholesterol >= 280):
+            chol_points = 1
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 75) and (age <= 79):
+        agepoints = 13
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 0
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 0
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 1
+        elif (cholesterol >= 280):
+            chol_points = 1
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 1
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+    else:
+        print("Print and age in between 20-79")
+
+
+
+
+
+# FEMALE
+
+
+
+
+
+if gender == ('F'):
+# AGE
+    if (age >= 20) and (age <= 34):
+        agepoints = -7
+# CHOLESTEROL
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 4
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 8
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 11
+        elif (cholesterol >= 280):
+            chol_points = 13
+        else:
+            print("please enter a number that works") #FIGURE THIS OUT
+# SMOKING
+        if smoke == ("YES"):
+            smokepoints = 9
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+
+    # ------------------------------------------------------------------------------------------------
+    elif (age >= 35) and (age <= 39):
+        agepoints = -3
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 4
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 8
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 11
+        elif (cholesterol >= 280):
+            chol_points = 13
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 9
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 40) and (age <= 44):
+        agepoints = 0
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 3
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 6
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 8
+        elif (cholesterol >= 280):
+            chol_points = 10
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 7
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 45) and (age <= 49):
+        agepoints = 3
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 3
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 6
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 8
+        elif (cholesterol >= 280):
+            chol_points = 10
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 7
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 50) and (age <= 54):
+        agepoints = 6
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 2
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 4
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 5
+        elif (cholesterol >= 280):
+            chol_points = 7
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 4
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 55) and (age <= 59):
+        agepoints = 8
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 2
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 4
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 5
+        elif (cholesterol >= 280):
+            chol_points = 7
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 4
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 60) and (age <= 64):
+        agepoints = 10
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 2
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 3
+        elif (cholesterol >= 280):
+            chol_points = 4
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 2
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 65) and (age <= 69):
+        agepoints = 12
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 2
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 3
+        elif (cholesterol >= 280):
+            chol_points = 4
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 2
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 70) and (age <= 74):
+        agepoints = 14
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 1
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 2
+        elif (cholesterol >= 280):
+            chol_points = 2
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+# ------------------------------------------------------------------------------------------------
+    elif (age >= 75) and (age <= 79):
+        agepoints = 16
+        if (cholesterol <= 160):
+            chol_points = 0
+        elif (cholesterol > 160) and (cholesterol <= 199):
+            chol_points = 1
+        elif (cholesterol >= 200) and (cholesterol <= 239):
+            chol_points = 1
+        elif (cholesterol >= 240) and (cholesterol <= 279):
+            chol_points = 2
+        elif (cholesterol >= 280):
+            chol_points = 2
+        else:
+            print("please enter a number that works")  # FIGURE THIS OUT
+        if smoke == ("YES"):
+            smokepoints = 1
+        elif smoke == ("NO"):
+            smokepoints = 0
+        else:
+            print("Please answer YES or NO")
+# HDL
+        if (HDL >= 60):
+            HDL_points = -1
+        elif (HDL >= 50) and (HDL <= 59):
+            HDL_points = 0
+        elif (HDL >= 40) and (HDL <= 49):
+            HDL_points = 1
+        elif (HDL <= 40):
+            HDL_points = 2
+        print('######################################')
+# SYSTOLIC BP
+        if (SysBP < 120) and (SysBPTreated == ("YES")):
+            SysBP_points = 0
+        elif (SysBP < 120) and (SysBPTreated == ("NO")):
+            SysBP_points = 0
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("YES")):
+            SysBP_points = 3
+        elif (SysBP >= 120) and (SysBP <= 129) and (SysBPTreated == ("NO")):
+            SysBP_points = 1
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("YES")):
+            SysBP_points = 4
+        elif (SysBP >= 130) and (SysBP <= 139) and (SysBPTreated == ("NO")):
+            SysBP_points = 2
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("YES")):
+            SysBP_points = 5
+        elif (SysBP >= 140) and (SysBP <= 159) and (SysBPTreated == ("NO")):
+            SysBP_points = 3
+        elif (SysBP >= 160) and (SysBPTreated == ("YES")):
+            SysBP_points = 6
+        elif (SysBP >= 160) and (SysBPTreated == ("NO")):
+            SysBP_points = 4
+    else:
+        print("Print and age in between 20-79")
+else:
+    print("Thank you")
+
+# Once all of the numbers are obtained from the input of the user then the program adds them up to become the
+# point_total, which then leads to being able to guesstimate the percentage chance of heart attack
+point_total = chol_points + agepoints + smokepoints + HDL_points + SysBP_points
+
+# In this if else statement the point_total is taken and then the percent chance of heart attack is given in the
+# print statement
+if gender == ("M"):
+    if (point_total < 0):
+        newpoint_total = ('< 1')
+
+    elif (point_total == 0):
+        newpoint_total = 1
+
+    elif (point_total == 1):
+        newpoint_total = 1
+
+    elif (point_total == 2):
+        newpoint_total = 1
+
+    elif (point_total == 3):
+        newpoint_total = 1
+
+    elif (point_total == 4):
+        newpoint_total = 1
+
+    elif (point_total == 5):
+        newpoint_total = 2
+
+    elif (point_total == 6):
+        newpoint_total = 2
+
+    elif (point_total == 7):
+        newpoint_total = 3
+
+    elif (point_total == 8):
+        newpoint_total = 4
+
+    elif (point_total == 9):
+        newpoint_total = 5
+
+    elif (point_total == 10):
+        newpoint_total = 6
+
+    elif (point_total == 11):
+        newpoint_total = 8
+
+    elif (point_total == 12):
+        newpoint_total = 10
+
+    elif (point_total == 13):
+        newpoint_total = 12
+
+    elif (point_total == 14):
+        newpoint_total = 16
+
+    elif (point_total == 15):
+        newpoint_total = 20
+
+    elif (point_total == 16):
+        newpoint_total = 25
+
+    elif (point_total >= 17):
+        newpoint_total = ("> 30")
+
+# This is the point total conversion for females
+
+elif gender == ("F"):
+    if (point_total < 9):
+        newpoint_total = ('< 1')
+
+    elif (point_total == 9):
+        newpoint_total = 1
+
+    elif (point_total == 10):
+        newpoint_total = 1
+
+    elif (point_total == 11):
+        newpoint_total = 1
+
+    elif (point_total == 12):
+        newpoint_total = 1
+
+    elif (point_total == 13):
+        newpoint_total = 2
+
+    elif (point_total == 14):
+        newpoint_total = 2
+
+    elif (point_total == 15):
+        newpoint_total = 3
+
+    elif (point_total == 16):
+        newpoint_total = 4
+
+    elif (point_total == 17):
+        newpoint_total = 5
+
+    elif (point_total == 18):
+        newpoint_total = 6
+
+    elif (point_total == 19):
+        newpoint_total = 8
+
+    elif (point_total == 19):
+        newpoint_total = 8
+
+    elif (point_total == 20):
+        newpoint_total = 11
+
+    elif (point_total == 21):
+        newpoint_total = 14
+
+    elif (point_total == 22):
+        newpoint_total = 17
+
+    elif (point_total == 23):
+        newpoint_total = 22
+
+    elif (point_total == 24):
+        newpoint_total = 27
+
+    elif (point_total >= 25):
+        newpoint_total = ("> 30")
+
+print("Your chances of having a heart attack in the next 10 years is", newpoint_total, "%")
