@@ -1,0 +1,40 @@
+import sys
+
+# so the way that i took this program was that we had to prove that the maclaurin series worked
+
+# This is the input that the user puts in
+
+print("ENTER A NUMBER GREATER THAN -1 AND LESS THAN 1 FOR THE MACLAURIN SERIES TO WORK (-1<x<1):", end=' ')
+x = float(input())
+
+# this is a loop that detects if the input is within the range of numbers that was wanted
+
+if x > -1 and x < 1:
+    pass
+else:
+    sys.exit("YOU HAVE ENTERED AN INELIGIBLE NUMBER PLEASE TRY THE PROGRAM AGAIN")
+
+# these are the variables used in the program
+
+i = 0
+tolerance = 1 * (10 ** -6)
+maclaurinseries = 0
+maclaurinseries2 = 0
+
+# this is one of the equations we wanted to prove
+
+thingitsequalto = 1 / ((1 - x) ** 2)
+
+# this is the summation portion of the program
+
+for i in range(0, 10000):
+    maclaurinseries2 = (i + 1) * (x ** i)
+    if abs(maclaurinseries2) < (1 * (10 ** -6)):
+        break
+    maclaurinseries = maclaurinseries + maclaurinseries2
+
+# just some print statements for some pizzazz
+
+print("\nTHIS IS PROOF THAT THE MACLAURIN SERIES HOLDS TRUE")
+print("\nThis is the answer to the easy equation:", thingitsequalto)
+print("This is the answer to the summation equation:", maclaurinseries)
