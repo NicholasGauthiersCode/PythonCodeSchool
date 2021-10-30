@@ -1,0 +1,29 @@
+from math import *
+
+# (0, 0) A: (0.01, 43)C: (0.06, 43.5)   D: (0.18, 60)E: (0.27, 51)
+
+# linearinterpolation = (y1 + (x - x1) * ((y2 - y1) / (x2 - x1))
+
+print("Please enter the strain on structural steel (between 0 and .27):")
+
+userstrain = float(input())
+
+interpolation1_to_2 = (0 + ((userstrain - 0) * ((43 - 0) / (0.01 - 0))))
+interpolation2_to_3 = (43 + ((userstrain - 0.01) * ((43.5 - 43) / (0.06 - 0.01))))
+interpolation3_to_4 = ((43.5 + (userstrain - 0.06) * ((60 - 43.5) / (0.18 - 0.06))))
+interpolation4_to_5 = ((60 + (userstrain - 0.18) * ((51 - 60) / (0.27 - 0.18))))
+
+
+
+if (userstrain <0):
+    print("Strain is undefined in that area, please restart program and try again")
+elif (userstrain >= 0 and userstrain <0.01):
+    print("The strain is approximately", '{:.1f}'.format(interpolation1_to_2))
+elif (userstrain >= 0.01 and userstrain < 0.06):
+    print("The strain is approximately", '{:.1f}'.format(interpolation2_to_3))
+elif (userstrain >= 0.06 and userstrain < 0.18):
+    print("The strain is approximately", '{:.1f}'.format(interpolation3_to_4))
+elif(userstrain >= 0.18 and userstrain <= 0.27):
+    print("The strain is approximately", '{:.1f}'.format(interpolation4_to_5))
+elif(userstrain > 0.27):
+    print("Strain is undefined in that area, please restart program and try again")
