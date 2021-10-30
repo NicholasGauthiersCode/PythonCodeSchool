@@ -1,0 +1,241 @@
+import sys
+
+
+# Activity 1
+
+print("ACTIVITY 1\nPlease enter a positive integer to compute the Collatz sequence:", end=" ")
+
+# All the variables needed to find the collatz sequence
+n = int(input())
+count = 0
+
+# a little if else statement that makes it to where if the person enters a number below 0 the program resets
+if n <= 0:
+    sys.exit("Please restart and enter a positive integer")
+else:
+    pass
+
+print("Here is the Collatz sequence starting at", n,)
+
+# The loop required to make the collatz seuqence pop out
+while n > 1:
+    if n % 2 == 0:
+        n = n / 2
+    elif n % 2 == 1:
+        n = (3 * n) + 1
+    count = count + 1
+    # this print statement makes it to where everytime the loop is ran it prints out the number that was found
+    # and then adds a comma to the end of it. Wash and repeat until the loop is done
+    print(int(n), ',', end=' ')
+print("\nIt took", count, "iterations to reach 1")
+
+
+# Activity 2
+
+# all the variable needed for this program
+print('\nACTIVITY 2\nPlease enter an integer:', end=' ')
+i = int(input())
+# since this program had to use the variable i for all of the equations I had to create two more variable that
+# were equal to i in order for the product program to run and in order for me to be able to print out what i was
+# equal to in the beginning.
+i_og = i
+i_print = i
+sum = 0
+product = 1
+
+# The loops for adding all the numbers i
+while i >= 1:
+    sum = sum + i
+    i -= 1
+# the loop for multiplying the numbers
+while i_og >= 1:
+    product = product * i_og
+    i_og -= 1
+print("The sum of the integers from 0 to", i_print, 'is', sum)
+print("The product of the integers from 0 to", i_print, 'is', product)
+
+
+# Activity 3
+
+print("\nACTIVITY 3\nPlease enter a four digit integer:", end=' ')
+
+# the one variable needed
+fourdigit = int(input())
+
+# this if else statement is here because if you use 1, 10, 100, or 1000 it will break the program.
+# there are probably more that do this but these were the ones that i found to break the program
+if fourdigit == 1 or fourdigit == 10 or fourdigit == 100 or fourdigit == 1000:
+    sys.exit("The number you have entered will break the code, please try again")
+else:
+    pass
+
+# this if else statement reads if the number is one digit long, two digits long, three digits long, or 4 digits long
+# and concatenates them if they need to be concatenated
+if fourdigit < 10:
+    fourdigit = '000' + str(fourdigit)
+    (int(fourdigit))
+elif fourdigit < 100 and fourdigit >= 10:
+    fourdigit = '00' + str(fourdigit)
+    int(fourdigit)
+elif fourdigit < 1000 and fourdigit >= 100:
+    fourdigit = '0' + str(fourdigit)
+    int(fourdigit)
+elif fourdigit > 9999:
+    sys.exit("Please restart and enter a 4 digit number.")
+
+# these variables are used in order to be able to make a print statement at the end that looks nice
+fourdigitog = fourdigit
+act3count = 0
+
+# here is the while loop that actually runs Kaprekar's routine
+while fourdigit != 6174:
+    print(fourdigit, '>', end=' ')
+    numin = "".join(sorted(str(fourdigit)))
+    numin2 = "".join(sorted(str(fourdigit), reverse=True))
+    fourdigit = int(numin2) - int(numin)
+    act3count += 1
+print(fourdigit)
+
+print(fourdigitog, "reaches 6174 via Kaprekar's routine in", act3count, 'iterations!')
+
+
+# Activity 4
+
+# Here are the variables used in this program
+print('\nACTIVITY 4\nPlease enter a number 1:', end=' ')
+x = int(input())
+print('Please enter a number 2:', end=' ')
+y = int(input())
+print('Please enter a number 3:', end=' ')
+z = int(input())
+
+# these if else statements run through a couple of things in order to print the correct statement.
+# in essence it checks to see if one variable is less then all of the others, and if not it will check to see
+# if two of the numbers are equal to each other and will still print the smallest number
+# and if not that it will print that all of the numbers are equal.
+if x < y and x < z:
+    print("The smallest number is", x)
+elif y < x and y < z:
+    print("The smallest number is", y)
+elif z < x and z < y:
+    print("The smallest number is", z)
+elif z == x and z == y:
+    print("These numbers are equal.")
+elif x == z and x < y and z < y:
+    print("The smallest number is", x)
+elif z == y and z < x and y < 0:
+    print("The smallest number is", z)
+elif y == x and y < z and y < x:
+    print("The smallest number is", y)
+elif x == y and x < z and y < z:
+    print("The smallest number is", x)
+elif y == z and y < x and z < x:
+    print("The smallest number is", y)
+
+
+# Activity 5
+
+# since we couldn't use while loops on this program it becomes a bit more chunky than necessary
+print('\nACTIVITY 5\nPlease enter a positive value for days:', end=' ')
+# This is one of the few variables used in the program.
+days = float(input())
+
+# This if else statement is checking how many days are inputted and spitting out what amount of widgets
+# have been made in that day
+
+if days <= 0:
+    sys.exit("Please enter a positive value for days (Between 1 and 101):")
+elif days > 0 and days <= 10:
+    slow = days * 10
+elif days == 11:
+    medium = 11 + (10 * 10)
+elif days == 12:
+    medium = 23 + (10 * 10)
+elif days == 13:
+    medium = 36 + (10 * 10)
+elif days == 14:
+    medium = 50 + (10 * 10)
+elif days == 15:
+    medium = 65+ (10 * 10)
+elif days == 16:
+    medium = 81 + (10 * 10)
+elif days == 17:
+    medium = 98 + (10 * 10)
+elif days == 18:
+    medium = 116 + (10 * 10)
+elif days == 19:
+    medium = 135 + (10 * 10)
+elif days == 20:
+    medium = 155 + (10 * 10)
+elif days == 21:
+    medium = 176 + (10 * 10)
+elif days == 22:
+    medium = 198 + (10 * 10)
+elif days == 23:
+    medium = 221 + (10 * 10)
+elif days == 24:
+    medium = 245 + (10 * 10)
+elif days == 25:
+    medium = 270 + (10 * 10)
+elif days == 26:
+    medium = 296 + (10 * 10)
+elif days == 27:
+    medium = 323 + (10 * 10)
+elif days == 28:
+    medium = 351 + (10 * 10)
+elif days == 29:
+    medium = 380 + (10 * 10)
+elif days == 30:
+    medium = 410 + (10 * 10)
+elif days == 31:
+    medium = 441 + (10 * 10)
+elif days == 32:
+    medium = 473 + (10 * 10)
+elif days == 33:
+    medium = 506 + (10 * 10)
+elif days == 34:
+    medium = 540 + (10 * 10)
+elif days == 35:
+    medium = 575 + (10 * 10)
+elif days == 36:
+    medium = 611 + (10 * 10)
+elif days == 37:
+    medium = 648 + (10 * 10)
+elif days == 38:
+    medium = 686 + (10 * 10)
+elif days == 39:
+    medium = 725 + (10 * 10)
+elif days == 40:
+    medium = 765 + (10 * 10)
+elif days == 41:
+    medium = 806 + (10 * 10)
+elif days == 42:
+    medium = 848 + (10 * 10)
+elif days == 43:
+    medium = 891 + (10 * 10)
+elif days == 44:
+    medium = 935 + (10 * 10)
+elif days == 45:
+    medium = 980 + (10 * 10)
+elif days == 46:
+    medium = 1026 + (10 * 10)
+elif days == 47:
+    medium = 1073 + (10 * 10)
+elif days == 48:
+    medium = 1121 + (10 * 10)
+elif days == 49:
+    medium = 1170 + (10 * 10)
+elif days == 50:
+    medium = 1220 + (10 * 10)
+elif days > 50 and days <= 101:
+    fast = (days * 50) + 1320
+elif days > 101:
+    sys.exit("Please enter a value between 1 and 101.")
+
+# and all the print statements
+if days <= 10:
+    print('The total number of widgets produced on day', int(days), 'is', int(slow))
+elif days > 10 and days <= 50:
+    print('The total number of widgets produced on day', int(days), 'is', int(medium))
+elif days >50 and days <=101:
+    print('The total number of widgets produced on day', int(days), 'is', int(fast))
