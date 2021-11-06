@@ -1,0 +1,126 @@
+# ACTIVITY 1
+
+# all the necessary imports
+import numpy as np
+import matplotlib.pyplot as plt
+
+# setting up all the variables that i will use
+m = np.array([(1.00583, -.087156), (0.087156, 1.00583)])
+v = np.array([1, 0])
+print(m)
+print(v)
+count = 0
+list1 = []
+lsit2 = []
+
+plt.ylabel('y-axis')
+plt.xlabel('x-axis')
+plt.title("It looks like a spiral to me!")
+
+while count < 250:
+    dot = m @ v
+    x = dot[0]
+    y = dot[1]      # this is a while loop that counts up to 250 in order to get the 250 points that are needed to make
+    list1.append(x) # the graph
+    lsit2.append(y)
+    v = dot
+    count += 1
+plt.plot(list1,lsit2, color='red') # plotting the (x,y) points obtained earlier
+plt.show()
+
+# ACTIVITY 2
+
+
+# using pandas in order to set a variable to the read file
+weather = pd.read_csv('CLLWeatherData.csv')
+
+# AVG TEMP AND WIND SPEEDS =============================================================================
+
+ax = plt.subplot()
+plt.ylabel('Avg Temp')
+plt.title("Avgerage Temperature and Wind Speeds")
+plt.plot(range(0, 1095), weather.iloc[1:1097, 3], color='tomato') # using pandas in order to plot the line graph
+plt.legend(['Average Temperature'], loc='lower left')
+ax2=ax.twinx()
+ax2.plot(range(0, 1095), weather.iloc[1:1097, 1],color="slategrey", linestyle='dashed')
+ax2.set_ylabel("Wind Speed",color="slategrey",fontsize=14)
+plt.legend(['Wind Speeds'], loc='lower right')
+
+# HISTOGRAM OF PRECIPITATION =======================================================================
+
+fig, ax2 = plt.subplots()
+ax2.hist(weather.iloc[1:1097, 2], bins = [0,.5, 1, 1.5, 2, 2.5])
+plt.ylabel('How Many Time It Rained That Many Inches') # using pandas to make histogram
+plt.xlabel('How Much Rain In Inches')
+plt.title("Histogram of Precipitation Over the 3 Year Period")
+
+# SCATTERPLOT SHOWING CORRELATION OF LOW TEMP AND WIND SPEED ====================================================
+
+plt.figure()
+plt.ylabel('Wind Speed (mph)')
+plt.xlabel('Temperature Low (F)')
+plt.title("Average Wind Speed vs Minimum Temperature") # using pandas to make scatter plot
+x = weather.iloc[1:1097, 5]
+y = weather.iloc[1:1097, 1]
+plt.scatter(x, y, color='k')
+
+# BAR GRAPH AND LINES COMPARING AVG, HIGH, AND LOW TEMP =============================================================
+
+# this is 3 humongous dictionaries in order to get the necessary numbers to plot everything
+
+dict = {'1':(weather.iloc[2:33,3]).mean(), '2': (weather.iloc[33:61,3]).mean(), '3': (weather.iloc[61:92,3]).mean(),
+        '4':(weather.iloc[92:122,3]).mean(), '5': (weather.iloc[122:153, 3]).mean(), '6':(weather.iloc[153:183,3]).mean(),
+        '7':(weather.iloc[183:214,3]).mean(), '8':(weather.iloc[214:245,3]).mean(), '9':(weather.iloc[245:275,3]).mean(),
+        '10':(weather.iloc[275:306,3]).mean(), '11':(weather.iloc[306:336,3]).mean(), '12':(weather.iloc[336:367,3]).mean(),
+        '13':(weather.iloc[367:398,3]).mean(), '14':(weather.iloc[398:426,3]).mean(), '15':(weather.iloc[426:457,3]).mean(),
+        '16':(weather.iloc[457:487,3]).mean(), '17':(weather.iloc[487:518,3]).mean(), '18':(weather.iloc[518:548,3]).mean(),
+        '19':(weather.iloc[548:579,3]).mean(), '20':(weather.iloc[579:610,3]).mean(), '21':(weather.iloc[610:640,3]).mean(),
+        '22':(weather.iloc[640:671,3]).mean(), '23':(weather.iloc[671:701,3]).mean(), '24':(weather.iloc[701:732,3]).mean(),
+        '25':(weather.iloc[732:763,3]).mean(), '26':(weather.iloc[763:792,3]).mean(), '27':(weather.iloc[792:823,3]).mean(),
+        '28':(weather.iloc[823:853,3]).mean(), '29':(weather.iloc[853:884,3]).mean(), '30':(weather.iloc[884:914,3]).mean(),
+        '31':(weather.iloc[914:945,3]).mean(), '32':(weather.iloc[945:976,3]).mean(), '33':(weather.iloc[976:1006,3]).mean(),
+        '34':(weather.iloc[1006:1037,3]).mean(), '35':(weather.iloc[1037:1067,3]).mean(),'36':(weather.iloc[1067:1098,3]).mean()}
+
+dict2 = {'1':(weather.iloc[2:33,4]).max(), '2': (weather.iloc[33:61,4]).max(), '3': (weather.iloc[61:92,4]).max(),
+        '4':(weather.iloc[92:122,4]).max(), '5': (weather.iloc[122:153, 4]).max(), '6':(weather.iloc[153:183,4]).max(),
+        '7':(weather.iloc[183:214,4]).max(), '8':(weather.iloc[214:245,4]).max(), '9':(weather.iloc[245:275,4]).max(),
+        '10':(weather.iloc[275:306,4]).max(), '11':(weather.iloc[306:336,4]).max(), '12':(weather.iloc[336:367,4]).max(),
+        '13':(weather.iloc[367:398,4]).max(), '14':(weather.iloc[398:426,4]).max(), '15':(weather.iloc[426:457,4]).max(),
+        '16':(weather.iloc[457:487,4]).max(), '17':(weather.iloc[487:518,4]).max(), '18':(weather.iloc[518:548,4]).max(),
+        '19':(weather.iloc[548:579,4]).max(), '20':(weather.iloc[579:610,4]).max(), '21':(weather.iloc[610:640,4]).max(),
+        '22':(weather.iloc[640:671,4]).max(), '23':(weather.iloc[671:701,4]).max(), '24':(weather.iloc[701:732,4]).max(),
+        '25':(weather.iloc[732:763,4]).max(), '26':(weather.iloc[763:792,4]).max(), '27':(weather.iloc[792:823,4]).max(),
+        '28':(weather.iloc[823:853,4]).max(), '29':(weather.iloc[853:884,4]).max(), '30':(weather.iloc[884:914,4]).max(),
+        '31':(weather.iloc[914:945,4]).max(), '32':(weather.iloc[945:976,4]).max(), '33':(weather.iloc[976:1006,4]).max(),
+        '34':(weather.iloc[1006:1037,4]).max(), '35':(weather.iloc[1037:1067,4]).max(),'36':(weather.iloc[1067:1098,4]).max()}
+
+dict3 = {'1':(weather.iloc[2:33,5]).min(), '2': (weather.iloc[33:61,5]).min(), '3': (weather.iloc[61:92,5]).min(),
+        '4':(weather.iloc[92:122,5]).min(), '5': (weather.iloc[122:153, 5]).min(), '6':(weather.iloc[153:183,5]).min(),
+        '7':(weather.iloc[183:214,5]).min(), '8':(weather.iloc[214:245,5]).min(), '9':(weather.iloc[245:275,5]).min(),
+        '10':(weather.iloc[275:306,5]).min(), '11':(weather.iloc[306:336,5]).min(), '12':(weather.iloc[336:367,5]).min(),
+        '13':(weather.iloc[367:398,5]).min(), '14':(weather.iloc[398:426,5]).min(), '15':(weather.iloc[426:457,5]).min(),
+        '16':(weather.iloc[457:487,5]).min(), '17':(weather.iloc[487:518,5]).min(), '18':(weather.iloc[518:548,5]).min(),
+        '19':(weather.iloc[548:579,5]).min(), '20':(weather.iloc[579:610,5]).min(), '21':(weather.iloc[610:640,5]).min(),
+        '22':(weather.iloc[640:671,5]).min(), '23':(weather.iloc[671:701,5]).min(), '24':(weather.iloc[701:732,5]).min(),
+        '25':(weather.iloc[732:763,5]).min(), '26':(weather.iloc[763:792,5]).min(), '27':(weather.iloc[792:823,5]).min(),
+        '28':(weather.iloc[823:853,5]).min(), '29':(weather.iloc[853:884,5]).min(), '30':(weather.iloc[884:914,5]).min(),
+        '31':(weather.iloc[914:945,5]).min(), '32':(weather.iloc[945:976,5]).min(), '33':(weather.iloc[976:1006,5]).min(),
+        '34':(weather.iloc[1006:1037,5]).min(), '35':(weather.iloc[1037:1067,5]).min(),'36':(weather.iloc[1067:1098,5]).min()}
+
+
+plt.figure()
+plt.ylabel('Temperature')
+plt.xlabel('Month')
+key = dict.keys()
+value = dict.values()
+key2 = dict2.keys() # creating (x,y) coordinates in order to plot the bar graph and the other two line graphs
+value2 = dict2.values()
+keycold = dict3.keys()
+valcold = dict3.values()
+plt.title("Comparing Average Temperature with High Temp and Low Temp per Month")
+plt.bar(key, value, color = 'lightskyblue')
+plt.plot(key2, value2, color='red')
+plt.plot(keycold, valcold, color='blue')
+plt.legend(['Hottest Temp', 'Coldest Temp', 'Avg Temp'], loc='lower right')
+
+plt.show()
