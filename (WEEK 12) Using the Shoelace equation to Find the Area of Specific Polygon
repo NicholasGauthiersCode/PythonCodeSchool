@@ -1,0 +1,53 @@
+print("Please enter name of file (Lab12a_input.txt):", end=' ')  # the only input from the user in order to know
+name = str(input())  # which file is being used
+
+
+def readfile(x):
+    global listV3
+    myfile = open(x, 'r')  # this is the readfile function that reads the inputs from the file, puts all of them
+    list_of_lists = []  # in a list, and then turns the list into integers instead of strings so we can do math with
+    for line in myfile:  # them
+        stripped_line = line.strip()
+        line_list = stripped_line.split()
+        list_of_lists.append(line_list)
+    list_of_lists.pop(0)
+    listV2 = 0
+    listV3 = []
+    for i in range(0, len(list_of_lists)):
+        listV2 = list_of_lists[i]
+        listV2 = listV2[0].split(',')
+        listV3.append(listV2)
+    for j in range(len(listV3)):
+        listV3[j][0] = int(listV3[j][0])
+        listV3[j][1] = int(listV3[j][1])
+    listV3.append(listV3[0])
+    return listV3
+
+
+def cross(y):
+    global answer1
+    global answer2
+    global answer3
+    global answer4
+    global answer5
+    answer1 = ((y[0][0] * y[1][1]) - (y[0][1] * y[1][0]))  # this is the cross function that takes those numbers from
+    answer2 = ((y[1][0] * y[2][1]) - (y[1][1] * y[2][0]))  # the lists and does the cross multiplication to them
+    answer3 = ((y[2][0] * y[3][1]) - (y[2][1] * y[3][0]))  # and creates variables for the numbers
+    answer4 = ((y[3][0] * y[4][1]) - (y[3][1] * y[4][0]))
+    answer5 = ((y[4][0] * y[5][1]) - (y[4][1] * y[5][0]))
+
+
+def shoelace(w):
+    cross(w)
+    totalanswer = (answer1 + answer2 + answer3 + answer4 + answer5) / 2  # this function takes the numbers from
+    print('The area of the polygon is', totalanswer)  # the cross function and adds them up to actually get the area
+    return totalanswer
+
+
+def main():
+    readfile(name)  # this function runs all of the other funcitons
+    shoelace(listV3)
+
+
+if name == 'Lab12a_input.txt':  # only runs if the user input is equal to the name we want
+    main()
