@@ -1,0 +1,34 @@
+import random as rnd       # the only import needed for this program
+
+print("Guess the secret number! Hint: it's an integer between 0 and 100...")
+y = rnd.randint(0, 100)
+
+# These are the three functions that I am using or order to run the program
+
+def checker (x):
+    if x == y:
+        print('\nYou got it!')
+
+def negative(x):
+    w = (x-y)
+    if w > 0:
+        print('\nGuess a little lower!')
+
+def postitive(x):
+    w = (x-y)
+    if w < 0:
+        print("\nGuess a little higher")
+
+print("\nWhat is your guess?", end=' ')     #fluff in order to make it look better
+user = int(input())
+count = 1
+
+while user != y:
+    negative(user)
+    postitive(user)         # this is the while loop that runs until the numbers that are being guessed and the number
+    print("What is your guess?", end=' ') #that needs to be guessed lines up
+    user = int(input())
+    count += 1
+checker(user)
+
+print("It took", count, "guesses to get it!") #print statment to get the amount of times they tried
