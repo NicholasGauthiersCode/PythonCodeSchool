@@ -1,0 +1,543 @@
+# Activity 1
+
+import turtle
+
+print('are you going to do AM/PM (12) or Military Time (24):', end = ' ')
+timetype = int(input()) # getting if the user is using military or standard time
+if timetype == 12 or timetype == 24:
+    pass
+else:
+    raise SystemExit("Please restart and enter either 12 or 24")
+
+turtle.width(4)
+turtle.color('white')
+turtle.setposition(-350, 250) # setting a little blurb on top of the turtle graph for pizazz
+turtle.color('black')
+turtle.write("HOURS : MINUTES", font = ("Verdana",30, "normal"))
+
+def twentyfourconvert(): # if the user inputs 24 hours they use this code to get the roman numerals
+    global newtimetype
+    print("Please enter the hour:", end= ' ')
+    x = int(input())
+    if x > 12:
+        newtimetype = x - 12
+    else:
+        newtimetype = x
+
+def noconvert(): # if the user inputs 12 hours they use this code to get the roman numerals
+    global newtimetype
+    print('Please enter the hour:', end=' ')
+    x = int(input())
+    if x <= 12:
+        newtimetype = x
+
+def setposistion(): # code to set the posisitons for all of the letters
+    turtle.color('white')
+    turtle.setposition(-350, 200)
+    turtle.color('black')
+def secondposition():
+    turtle.color('white')
+    turtle.setposition(-275, 200)
+    turtle.color('black')
+def thirdpoistion():
+    turtle.color('white')
+    turtle.setposition(-200, 200)
+    turtle.color('black')
+def fourthposition():
+    turtle.color('white')
+    turtle.setposition(-125, 200)
+    turtle.color('black')
+
+# LETTERS =============================================================================
+
+def I():
+    turtle.forward(50)
+    turtle.back(25)
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.right(90)
+    turtle.forward(25)
+    turtle.back(50)
+    turtle.right(180)
+
+def V():
+    turtle.right(70)
+    turtle.forward(79)
+    turtle.left(140)
+    turtle.forward(79)
+    turtle.right(70)
+
+def X():
+    turtle.right(60)
+    turtle.forward(90)
+    turtle.left(60)
+    turtle.color('white')
+    turtle.forward(5)
+    turtle.back(35)
+    turtle.left(60)
+    turtle.forward(5)
+    turtle.color('black')
+    turtle.forward(90)
+    turtle.right(60)
+
+def M():
+    turtle.color('white')
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.color('black')
+    turtle.left(180)
+    turtle.forward(76)
+    turtle.right(165)
+    turtle.forward(76)
+    turtle.left(155)
+    turtle.forward(76)
+    turtle.right(160)
+    turtle.forward(76)
+    turtle.left(80)
+    turtle.color('white')
+    turtle.forward(3)
+def L():
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.left(90)
+    turtle.forward(50)
+
+def intToRoman(num): # makes integers into strings of roman numerals
+    global pp
+    m = ["", "M", "MM", "MMM"]
+    c = ["", "C", "CC", "CCC", "CD", "D",
+         "DC", "DCC", "DCCC", "CM "]
+    x = ["", "X", "XX", "XXX", "XL", "L",
+         "LX", "LXX", "LXXX", "XC"]
+    i = ["", "I", "II", "III", "IV", "V",
+         "VI", "VII", "VIII", "IX"]
+
+    thousands = m[num // 1000]
+    hundereds = c[(num % 1000) // 100]
+    tens = x[(num % 100) // 10]
+    ones = i[num % 10]
+
+    ans = (thousands + hundereds + tens + ones)
+    pp = ans
+    return ans
+
+if timetype == 24:
+    twentyfourconvert()
+    print('Please enter minutes:', end=' ')
+    minute = int(input())
+    if minute >= 60:
+        raise SystemExit('Please restart and enter a correct minute')
+    minutes = intToRoman(minute)
+elif timetype == 12:
+    noconvert()
+    print('Please enter minutes', end=' ')
+    minute = int(input())
+    if minute >= 60:
+        raise SystemExit('Please restart and enter a correct minute')
+    minutes = intToRoman(minute)
+
+print('\n')
+# a bunch of functions that say what to do if the user input 1-12 for the hours
+def romanone():
+    print(newtimetype, 'converted to roman numerals is I')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    I()
+
+def romantwo():
+    print(newtimetype, 'converted to roman numerals is II')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    I()
+    turtle.color('white')
+    secondposition()
+    I()
+
+def romanthree():
+    print(newtimetype, 'converted to roman numerals is III')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    I()
+    secondposition()
+    I()
+    thirdpoistion()
+    I()
+
+def romanfour():
+    print(newtimetype, 'converted to roman numerals is IV')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    I()
+    secondposition()
+    V()
+
+def romanfive():
+    print(newtimetype, 'converted to roman numerals is V')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    V()
+
+def romansix():
+    print(newtimetype, 'converted to roman numerals is VI')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    V()
+    secondposition()
+    I()
+
+def romanseven():
+    print(newtimetype, 'converted to roman numerals is VII')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    V()
+    secondposition()
+    I()
+    thirdpoistion()
+    I()
+
+def romaneight():
+    print(newtimetype, 'conveted to roman numerals is VII')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    V()
+    secondposition()
+    I()
+    thirdpoistion()
+    I()
+    fourthposition()
+    I()
+
+def romannine():
+    print(newtimetype, 'converted to roman numberals is IX')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    I()
+    secondposition()
+    X()
+
+def romanten():
+    print(newtimetype, 'converted to roman numerals is X')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    X()
+
+def romaneleven():
+    print(newtimetype, 'converted to roman numerals is XI')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    X()
+    secondposition()
+    I()
+
+def romantwelve():
+    print(newtimetype, 'converted to roman numerals is XII')
+    print(minute, 'converted to roman numerals is', pp)
+    setposistion()
+    X()
+    secondposition()
+    I()
+    thirdpoistion()
+    I()
+
+def minuteplot():
+    turtle.color('white')
+    turtle.setposition(-60, 125)
+    turtle.color('black')
+    turtle.write(':', font = ("Verdana",65, "normal"))
+    turtle.color('white')
+    turtle.setposition(-45, 200)
+    turtle.color('white')
+    x = -10
+    turtle.setposition(x,200)
+    turtle.color('black')
+    for i in range(len(minutes)):
+        if minutes[i] == 'I':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            I()
+            x += 75
+        elif minutes[i] == 'V':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            V()
+            x += 75
+        elif minutes[i] == 'X':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            X()
+            x += 75
+        elif minutes[i] == 'M':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            M()
+            x += 75
+        elif minutes[i] == 'L':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            L()
+            x += 75
+
+# if statements so that the code knows what to print
+
+if newtimetype == 1:
+    romanone()
+elif newtimetype == 2:
+    romantwo()
+elif newtimetype == 3:
+    romanthree()
+elif newtimetype == 4:
+    romanfour()
+elif newtimetype == 5:
+    romanfive()
+elif newtimetype == 6:
+    romansix()
+elif newtimetype == 7:
+    romanseven()
+elif newtimetype == 8:
+    romaneight()
+elif newtimetype == 9:
+    romannine()
+elif newtimetype == 10:
+    romanten()
+elif newtimetype == 11:
+    romaneleven()
+elif newtimetype == 12:
+    romantwelve()
+
+minuteplot() # this prints the minutes that the user gives using the roman numeral for loops method
+turtle.done()
+
+# Activity 2
+
+import turtle
+
+print('Please enter the day (day month year ex: 25 November 2021 = 25 11 2021) you would like to use:', end=' ')
+day, month, year = (input()).split()
+day = int(day)
+month = int(month)
+year = int(year)
+
+turtle.width(4)
+
+# POSITION FUNCTIONS =====================================================================================
+
+def setposistion():
+    turtle.color('white')
+    turtle.setposition(-350, 200)
+    turtle.color('black')
+def secondposition():
+    turtle.color('white')
+    turtle.setposition(-275, 200) # functions to set the position of the turtle cursor
+    turtle.color('black')
+def thirdpoistion():
+    turtle.color('white')
+    turtle.setposition(-200, 200)
+    turtle.color('black')
+def fourthposition():
+    turtle.color('white')
+    turtle.setposition(-125, 200)
+    turtle.color('black')
+
+# LETTERS=====================================================================================================
+
+def I(): # all of the functions for the letters
+    turtle.forward(50)
+    turtle.back(25)
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.right(90)
+    turtle.forward(25)
+    turtle.back(50)
+    turtle.right(180)
+
+def V():
+    turtle.right(60)
+    turtle.forward(79)
+    turtle.left(120)
+    turtle.forward(79)
+    turtle.right(60)
+    turtle.right(90)
+    turtle.color('white')
+    turtle.forward(80)
+    turtle.left(90)
+    turtle.color('black')
+
+def X():
+    turtle.right(60)
+    turtle.forward(90)
+    turtle.left(60)
+    turtle.color('white')
+    turtle.forward(5)
+    turtle.back(35)
+    turtle.left(60)
+    turtle.forward(5)
+    turtle.color('black')
+    turtle.forward(90)
+    turtle.right(60)
+
+def M():
+    turtle.color('white')
+    turtle.right(90)
+    turtle.forward(75)
+    turtle.color('black')
+    turtle.left(180)
+    turtle.forward(76)
+    turtle.right(165)
+    turtle.forward(76)
+    turtle.left(155)
+    turtle.forward(76)
+    turtle.right(160)
+    turtle.forward(76)
+    turtle.left(80)
+    turtle.color('white')
+    turtle.forward(3)
+
+def intToRoman(num): # a function that reads in an integer and creates a string of roman numerals as it output
+    m = ["", "M", "MM", "MMM"]
+    c = ["", "C", "CC", "CCC", "CD", "D",
+         "DC", "DCC", "DCCC", "CM "]
+    x = ["", "X", "XX", "XXX", "XL", "L",
+         "LX", "LXX", "LXXX", "XC"]
+    i = ["", "I", "II", "III", "IV", "V",
+         "VI", "VII", "VIII", "IX"]
+
+    thousands = m[num // 1000]
+    hundereds = c[(num % 1000) // 100]
+    tens = x[(num % 100) // 10]
+    ones = i[num % 10]
+
+    ans = (thousands + hundereds + tens + ones)
+
+    return ans
+
+thing = intToRoman(day)
+thing2 = intToRoman(month)
+thing3 = intToRoman(year)
+
+def nicemove(): # this function is used to move the turtle cursor from the end of day to the top of month and same for month and year
+    turtle.color('white')
+    turtle.forward(10)
+    turtle.right(90)
+    turtle.forward(10)
+    turtle.left(90)
+
+def dayplot(): # a function with a for loop to tell turtle what to print
+    turtle.color('white')
+    turtle.setposition(-350, 225)
+    turtle.color('black')
+    turtle.write('DAYS', font = ("Verdana",30, "normal"))
+    turtle.color('white')
+    x = -350
+    turtle.setposition(x,200)
+    turtle.color('black')
+    for i in range(len(thing)):
+        if thing[i] == 'I':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            I()
+            x += 75
+        elif thing[i] == 'V':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            V()
+            x += 75
+        elif thing[i] == 'X':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            X()
+            x += 75
+        elif thing[i] == 'M':
+            turtle.color('white')
+            turtle.setposition(x, 200)
+            turtle.color('black')
+            M()
+            x += 75
+
+def monthplot(): # a funciton with a for loop in order to tell turtle what to print
+    turtle.color('white')
+    turtle.setposition(-350, 25)
+    turtle.color('black')
+    turtle.write('MONTH', font = ("Verdana",30, "normal"))
+    turtle.color('white')
+    x = -350
+    turtle.setposition(x,0)
+    turtle.color('black')
+    for w in range(len(thing2)):
+        if thing2[w] == 'I':
+            turtle.color('white')
+            turtle.setposition(x, 0)
+            turtle.color('black')
+            I()
+            x += 75
+        elif thing2[w] == 'V':
+            turtle.color('white')
+            turtle.setposition(x, 0)
+            turtle.color('black')
+            V()
+            x += 75
+        elif thing2[w] == 'X':
+            turtle.color('white')
+            turtle.setposition(x, 0)
+            turtle.color('black')
+            X()
+            x += 75
+        elif thing2[w] == 'M':
+            turtle.color('white')
+            turtle.setposition(x, 0)
+            turtle.color('black')
+            M()
+            x += 75
+
+def yearplot(): # a function with a for loop that reads the string in order to tell turtle what to print
+    turtle.color('white')
+    turtle.setposition(-350, -175)
+    turtle.color('black')
+    turtle.write('YEARS', font = ("Verdana",30, "normal"))
+    turtle.color('white')
+    x = -350
+    turtle.setposition(x,0)
+    turtle.color('black')
+    for w in range(len(thing3)):
+        if thing3[w] == 'I':
+            turtle.color('white')
+            turtle.setposition(x, -200)
+            turtle.color('black')
+            I()
+            x += 75
+        elif thing3[w] == 'V':
+            turtle.color('white')
+            turtle.setposition(x, -200)
+            turtle.color('black')
+            V()
+            x += 75
+        elif thing3[w] == 'X':
+            turtle.color('white')
+            turtle.setposition(x, -200)
+            turtle.color('black')
+            X()
+            x += 75
+        elif thing3[w] == 'M':
+            turtle.color('white')
+            turtle.setposition(x, -200)
+            turtle.color('black')
+            M()
+            x += 75
+
+print('\nThe day you have chose looks like', thing, thing2, thing3, 'in roman numerals')
+print("Now check the pop-up to see it being drawn out!")
+
+dayplot()
+nicemove()
+monthplot() # all of the functions coming together in order to make the final turtle drawing
+nicemove()
+yearplot()
+
+turtle.done()
