@@ -1,0 +1,122 @@
+import matplotlib.pyplot as plt
+from scipy.misc import derivative
+import numpy as np
+
+x = np.linspace(-5, 5, 1000) # setting up x values to be used in the future
+
+print('Please enter at least 3 coefficients to be used for your polymonial:', end=' ')
+w = input().split(' ')
+o = ([int(x) for x in w]) # having user enter the coefficients
+length = len(o)
+
+if len(o) < 3:  # an if statement to check to see if the user entered more than 3 coefficents
+    raise SystemExit('You must enter at least 3 coefficients.')
+
+print("\nThe coefficients you want to use are:", end = ' ')
+for i in range(len(o)): # a little fluff in order to make the output look nicer
+    print(o[i], end=' ')
+
+print(' ')
+print("The highest exponent that is going to be used is", end= ' ') # more fluff
+print((len(o) - 1))
+
+def firstfunction(x):
+    funcnum = 0
+    for i in range(length):
+        exponent = length - (i + 1)
+        function = o[i] * x ** (exponent) # setting up the numbers that the function will use to get the derivative
+        funcnum += function
+    return funcnum
+
+def firstderivative(x):
+    return derivative(firstfunction, x) # using scipy to get the first derivative
+
+def secondderiv(x):
+    return derivative(firstderivative, x) # using scipy to get the second derivative
+
+thing = -5
+thing2 = -4.99 # more or less i am checking in a very small x range to see if the previous number is smaller then
+thing3 = -4.98 # the middle number and if the farthest x value is smaller than the middle number
+while thing3 <= 5: # and if all those conditions are found a local min is found
+    a = firstfunction(thing)
+    b = firstfunction(thing2)
+    c = firstfunction(thing3)
+    if a > b < c: # FINDING LOCAL MIN OF THE REGULAR FUNCTION
+        plt.plot(thing2, b, marker = 'o', color = 'k')
+    thing += .01
+    thing2 += .01
+    thing3 += .01
+thing4 = -5
+thing5 = -4.99
+thing6 = -4.98
+
+while thing6 <= 5: # Same thing as the one before but this time it is the opposite so it will find a local max
+    a = firstfunction(thing4)
+    b = firstfunction(thing5) # FINDING LOCAL MAX OF THE FUNCTION
+    c = firstfunction(thing6)
+    if a < b > c:
+        plt.plot(thing5, b, marker = 'o', color = 'k')
+    thing4 += .01
+    thing5 += .01
+    thing6 += .01
+
+thing = -5
+thing2 = -4.99
+thing3 = -4.98
+while thing3 <= 5: # FINDING LOCAL MIN OF FIRST DERIVATIVE
+    a = firstderivative(thing)
+    b = firstderivative(thing2)
+    c = firstderivative(thing3)
+    if a > b < c: # FINDING LOCAL MIN OF CURVE
+        plt.plot(thing2, b, marker = 'o', color = 'k')
+    thing += .01
+    thing2 += .01
+    thing3 += .01
+
+thing4 = -5
+thing5 = -4.99
+thing6 = -4.98
+
+while thing6 <= 5:
+    a = firstderivative(thing4)
+    b = firstderivative(thing5) # FINDING LOCAL MAX OF FIRST DERIVATIVE
+    c = firstderivative(thing6)
+    if a < b > c:
+        plt.plot(thing5, b, marker = 'o', color = 'k')
+    thing4 += .01
+    thing5 += .01
+    thing6 += .01
+
+num10 = -5
+num11 = -4.99
+num12 = -4.98
+while num11 < 5:
+    a = secondderiv(num10)
+    b = secondderiv(num11) # FINDING LOCAL MIN OF SECOND DERIVATIVE
+    c = secondderiv(num12)
+    if a > b < c:
+        plt.plot(num11, b, marker = 'o', color = 'k')
+    num10 += .01
+    num11 += .01
+    num12 += .01
+
+num13 = -5
+num14 = -4.99
+num15 = -4.98
+while num14 < 5:
+    a = secondderiv(num13)
+    b = secondderiv(num14) # FINDING LOCAL MAX OF SECOND DERIVATIVE
+    c = secondderiv(num15)
+    if a < b > c:
+        plt.plot(num14, b, marker = 'o', color = 'k')
+    num13 += .01
+    num14 += .01
+    num15 += .01
+
+plt.plot(x, firstfunction(x), label = "f(x)")
+plt.plot(x, firstderivative(x),linestyle = '-', label = "f'(x)") # Printing everything out using matplotlib
+plt.plot(x, secondderiv(x), linestyle = '--', label = "f''(x)")
+plt.axhline(y=0, color='k', linestyle='-')
+plt.axvline(x=0, color='k', linestyle='-')
+plt.legend(loc = 'upper left')
+plt.show()
