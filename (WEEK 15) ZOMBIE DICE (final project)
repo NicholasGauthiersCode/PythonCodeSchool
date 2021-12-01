@@ -1,0 +1,630 @@
+# =================================================================
+# ALL THE IMPORTS
+# =================================================================
+
+import random
+import winsound
+import time
+from matplotlib import pyplot as plt
+import pandas as pd
+import tkinter as tk
+import pygame
+import turtle
+
+# =================================================================
+# these are the lists that we used to be able to find the random numbers and values
+# =================================================================
+
+greendice = ['brain', 'brain', 'brain', 'shotgun', 'runner', 'runner']
+yellowdice = ['brain', 'brain', 'runner', 'runner', 'shotgun', 'shotgun']
+reddice = ['brain', 'shotgun', 'shotgun', 'shotgun', 'runner', 'runner']
+list = ['greendice', 'greendice', 'greendice', 'greendice', 'greendice', 'greendice', 'yellowdice', 'yellowdice',
+        'yellowdice', 'yellowdice',  'reddice', 'reddice', 'reddice']
+groanlist = ['Groan', 'Groan2', 'Groan3']
+aianswernone = ['roll', 'roll', 'roll', 'roll', 'roll']
+aianswerone = ['roll', 'roll','roll', 'bank', 'bank']
+aianswertwo = ['roll', 'bank', 'bank', 'bank',  'bank']
+
+# =================================================================
+# variables used throughout the code
+# ===============================================================
+
+truefactor = True
+totaltrue = True
+megatrue = True
+aitrue = False
+winloop = False
+brainlist = []
+shotgunlist = []
+runnerlist = []
+shotguntotallist = []
+braintotallist = []
+runnertotallist = []
+instructionslist = []
+namelist = []
+game = 0
+count = 0
+winnernumtocheck = 0
+
+# =================================================================
+# ALL THE FUNCTIONS  USED FOR THE CODE
+# =================================================================
+
+def shotgunnoise():
+    '''funciton that will play shotgun noise when players lose'''
+    winsound.PlaySound('Shotgun', winsound.SND_FILENAME)
+def zombiegroan():
+    '''function that will play a random shotgun noise'''
+    x = random.choice(groanlist)
+    winsound.PlaySound(x, winsound.SND_FILENAME)
+def evillaugh():
+    '''function that plays evil laugh when needed'''
+    winsound.PlaySound('EvilLaugh', winsound.SND_FILENAME)
+def coins():
+    '''plays coin sounds when players bank their brains'''
+    winsound.PlaySound('Change', winsound.SND_FILENAME)
+def dicerollnoise():
+    '''plays dice rolling sound when player rolls dice'''
+    winsound.PlaySound('DiceRoll', winsound.SND_FILENAME)
+def backgroundnoise():
+    pygame.mixer.init()
+    pygame.mixer.music.load('BackgroundSong.wav')
+    pygame.mixer.music.play(0)
+def computernoise():
+    winsound.PlaySound('ComputerVoice', winsound.SND_FILENAME)
+def computerbye():
+    winsound.PlaySound('ComputerGoodbye', winsound.SND_FILENAME)
+def endmusic():
+    pygame.mixer.music.stop()
+
+def computerplayer():
+    '''Asks and gets how many ai players the user wants'''
+    global aiamount
+    print("WOULD YOU LIKE TO PLAY WITH AI? (Y/N)", end=' ')
+    question = input().lower()
+    if question == 'n':
+        print("NO AI NEEDED I SEE...\n")
+        computerbye()
+        aiamount = 0
+        pass
+    elif question == 'y':
+        computernoise()
+        print('HOW MANY AI WOULD YOU LIKE IN YOUR GAME:', end= ' ')
+        aiamount = int(input())
+        
+def playernum():
+    '''Gets amount of players from the user and makes a funny comment depending'''
+    global playernum
+    playernum = int(input("PLEASE ENTER HOW MANY PLAYERS YOU ARE PLAYING WITH: "))
+    if  playernum == 1:
+        print("\nHA... BY YOURSELF? IF YOU WISH...")
+        evillaugh()
+        computerplayer()
+    elif playernum >= 0 and playernum != 1:
+        print("\nINTERESTING.", playernum , "PLAYERS...LETS HOPE YOU CAN GET " 
+              "MORE BRAINS THEN YOUR COMPANIONS...")
+        evillaugh()
+        computerplayer()
+    elif playernum < 0:
+        raise SystemExit("CAN'T HAVE NEGATIVE PLAYERS CAN WE...")
+    for i in range(playernum + aiamount):
+        brainlist.append(0)
+        shotgunlist.append(0)
+        runnerlist.append(0)
+        braintotallist.append(0)
+        shotguntotallist.append(0)
+        runnertotallist.append(0)
+        if i+1 <= playernum:
+            names = 'Player ' + str(i + 1)
+            namelist.append(names)
+        elif i+1 > playernum:
+            ainames = 'Ai ' + str(i + 1)
+            namelist.append(ainames)
+
+def datamaker():
+    '''A function that takes in all the the information, names, total brains obtained over
+    the whole game, total shotgun, and total runners and puts it first into a list
+    and then another  list to make a list in a list, and then into a tuple so that
+    pandas can recognize it in order to use its DataFrame function'''
+    global df
+    smalllist = []
+    mediumlist = []
+    for i in range(playernum + aiamount):
+        smalllist = [namelist[i], braintotallist[i], shotguntotallist[i], runnertotallist[i]]
+        mediumlist.append(smalllist)
+    bigtuple = (mediumlist)
+    df = pd.DataFrame(bigtuple, columns=['Players', 'Amount of Brains', 
+                        'Amount of Shotguns', 'Amount of Runners'])
+    
+def roll():
+    '''roll the "dice" and gets two random variables for the dice and the dice face'''
+    global rd, yd, gd, brainnum, shotgunnum, runnernum
+    diceroll = (random.choice(list))
+    if diceroll == 'greendice':
+        gd = random.choice(greendice)
+        if gd == 'brain':
+            brainnum += 1
+        elif gd == 'shotgun':
+            shotgunnum += 1
+        elif gd == 'runner':
+            runnernum += 1
+        print('Green Dice:', gd)
+    elif diceroll == 'yellowdice':
+        yd = random.choice(yellowdice)
+        if yd == 'brain':
+            brainnum += 1
+        elif yd == 'shotgun':
+            shotgunnum += 1
+        elif yd == 'runner':
+            runnernum += 1
+        print('Yellow Dice:', yd)
+    elif diceroll == 'reddice':
+        rd = random.choice(reddice)
+        if rd == 'brain':
+            brainnum += 1
+        elif rd == 'shotgun':
+            shotgunnum += 1
+        elif rd == 'runner':
+            runnernum += 1
+        print('Red Dice:', rd)
+
+def graph():
+    '''Taking the df(data frame) variable from the datamaker() function the computer
+    will plot a multi-bar chart for each player to see how there luck stacked up
+    against all the other players/ai(if they used that function)'''
+    df.plot(x='Players', kind='bar', stacked=False, title='How Was Your Luck Compared To'
+            ' The Other Players')
+    plt.show()
+
+def instructiontext():
+    global content_list
+    f = open("instructions.txt", "r")
+    content_list = f.readlines()
+
+def instructions():
+    '''a function that creates a gui for the player to be able to click
+    and create a new window that displays the instructions'''
+    window = tk.Tk()
+    print("A NEW WINDOW HAS OPENED, ONCE YOU HAVE READ THE RULES, CLOSE THE WINDOW\n")
+    # manuel instructions for the game
+    def clicked():
+        '''a function that allows the window to be clicked'''
+        # create a toplevel
+        top_window = tk.Toplevel(window)
+        for ind, fruit in enumerate(content_list):
+            # print manuel in the tkinter window
+            # create a label widget in top_window
+            names_label = tk.Label(top_window)
+            # give it a position using grid
+            names_label.grid(row=int(ind)+1, column=0)
+            # print the instructions in the label
+            names_label.config(text=fruit)
+    btn = tk.Button(window, text="CLICK HERE FOR INSTRUCTIONS OF ZOMBIE DICE", command=clicked)
+    btn.grid(column=0, row=0, padx=30, pady=2)
+    window.mainloop()
+
+def cube():
+    '''Code used to draw "dice" (3d cubes)'''
+    x = 25
+    l = x * (2 / 5)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(45)
+    turtle.forward(x)
+    turtle.right(45)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(90)
+    turtle.forward(x)
+    turtle.right(135)
+    turtle.forward(x)
+    turtle.penup()
+    turtle.forward(l)
+    turtle.pendown()
+    turtle.forward(x)
+    turtle.left(135)
+    turtle.forward(x)
+    turtle.left(45)
+    turtle.forward(x)
+    turtle.penup()
+    turtle.forward(x)
+    turtle.pendown()
+
+# draws 3 cubes and a cup
+def dice_roll():
+    '''code that impliments the 3d cubes draw from before and create a nice picture'''
+    x = 25
+    l = 3 * x
+    cube()
+    cube()
+    cube()
+    turtle.penup()
+    turtle.left(45)
+    turtle.forward(l)
+    turtle.pendown()
+    turtle.circle(35)
+    turtle.right(45)
+    turtle.forward(70)
+    turtle.left(90)
+    turtle.forward(50)
+    turtle.left(90)
+    turtle.forward(70)
+    turtle.back(70)
+    turtle.right(45)
+    turtle.forward(10)
+    turtle.left(45)
+    turtle.forward(80)
+
+# =================================================================
+# BACGROUND MUSIC SETUP
+# =================================================================
+
+bgmusic = input(('\nWOULD YOU LIKE BACKGROUND MUSIC (Y or N): ')).lower()
+if bgmusic == 'y':
+    backgroundnoise()
+else:
+    pass
+
+# =================================================================
+# INSTRUCTION SET UP
+# =================================================================
+
+instructiontext()
+
+instructioninput = input('WOULD YOU LIKE TO READ INSTRUCTIONS Y/N: ').lower()
+if instructioninput == "y":
+    instructions()
+elif instructioninput == 'n':
+    pass
+else:
+    raise SystemExit("tisk tisk please write y or n the next time")
+
+# =================================================================
+# ALL THE TURTLES DIRETIONS/CODE
+# =================================================================
+
+# TURTLES DIRECTION FOR WORD ZOMBIE
+# --------------------------------
+turtle.Screen()
+turtle.pencolor('green') # setting up the position for the turtle cursor to go to
+turtle.pensize(4)
+turtle.speed(10)
+turtle.penup()
+turtle.left(90)
+turtle.forward(300)
+turtle.left(90)
+turtle.forward(700)
+turtle.right(180)
+turtle.pendown()
+# Z
+turtle.forward(100)
+turtle.right(110)
+turtle.forward(270)
+turtle.left(110)
+turtle.forward(100)
+# space
+turtle.penup()
+turtle.left(90)
+turtle.forward(250)
+turtle.right(90)
+turtle.forward(50)
+turtle.right(90)
+turtle.pendown()
+# start of o
+turtle.forward(250)
+turtle.left(90)
+turtle.forward(150)
+turtle.left(90)
+turtle.forward(250)
+turtle.left(90)
+turtle.forward(150)
+# space
+turtle.penup()
+turtle.right(180)
+turtle.forward(250)
+turtle.pendown()
+# M
+turtle.right(100)
+turtle.forward(250)
+turtle.left(180)
+turtle.forward(250)
+turtle.right(155)
+turtle.forward(250)
+turtle.left(150)
+turtle.forward(250)
+turtle.right(155)
+turtle.forward(250)
+# space
+turtle.penup()
+turtle.left(80)
+turtle.forward(100)
+turtle.pendown()
+# b
+turtle.left(90)
+turtle.forward(250)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(180)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+turtle.right(90)
+turtle.forward(150)
+# space
+turtle.right(90)
+turtle.forward(250)
+turtle.right(90)
+turtle.forward(100)
+turtle.penup()
+turtle.forward(100)
+turtle.pendown()
+# I
+turtle.right(90)
+turtle.forward(250)
+# space
+turtle.right(180)
+turtle.forward(250)
+turtle.penup()
+turtle.right(90)
+turtle.forward(100)
+turtle.pendown()
+# E
+turtle.forward(200)
+turtle.left(180)
+turtle.forward(200)
+turtle.left(90)
+turtle.forward(125)
+turtle.left(90)
+turtle.forward(200)
+turtle.left(180)
+turtle.forward(200)
+turtle.left(90)
+turtle.forward(125)
+turtle.left(90)
+turtle.forward(200)
+
+# TURTLES DIRECTIONS FOR WORD DICE
+# --------------------------------
+
+# space for dice
+turtle.penup()
+turtle.left(180)
+turtle.forward(1000)
+turtle.left(90)
+turtle.forward(200)
+turtle.pendown()
+turtle.color("red")
+# D
+turtle.right(90)
+turtle.forward(150)
+turtle.left(90)
+turtle.forward(200)
+turtle.left(90)
+turtle.forward(150)
+turtle.circle(100,190)
+# space
+turtle.penup()
+turtle.left(170)
+turtle.forward(200)
+turtle.pendown()
+# i
+turtle.right(90)
+turtle.forward(200)
+# Space
+turtle.penup()
+turtle.left(90)
+turtle.forward(100)
+turtle.pendown()
+# C
+turtle.forward(200)
+turtle.left(180)
+turtle.forward(200)
+turtle.right(90)
+turtle.forward(200)
+turtle.right(90)
+turtle.forward(200)
+# space
+turtle.penup()
+turtle.forward(100)
+turtle.pendown()
+# E
+turtle.forward(150)
+turtle.left(180)
+turtle.forward(150)
+turtle.left(90)
+turtle.forward(100)
+turtle.left(90)
+turtle.forward(150)
+turtle.left(180)
+turtle.forward(150)
+turtle.left(90)
+turtle.forward(100)
+turtle.left(90)
+turtle.forward(150)
+# space
+turtle.penup()
+turtle.forward(100)
+turtle.pendown()
+turtle.pencolor("black")
+
+# =================================================================
+# MAIN CODE
+# =================================================================
+
+dice_roll()
+turtle.exitonclick()
+
+print('\n ---------------------- ')
+print('|        ZOMBIE        |')
+print('|         DICE         |')
+print(' ---------------------- \n')
+    
+zombiegroan()
+playernum()
+
+while totaltrue: # the outer while loop that only stops once a player has 13 brains
+    for i in range(playernum):
+        # resetting all the variables
+        truefactor = True
+        print('==================================================')
+        print("\nPLAYER {}'S TURN...".format(i + 1))
+        print('PLAYER', i + 1 , "HAS", brainlist[i], "BANKED BRAINS\n")
+        brainnum = 0
+        shotgunnum = 0
+        runnernum = 0
+        while truefactor: # a while loops that runs until the player in progress either gets
+            print("TYPE roll TO ROLL") # 3 shotguns or 13 brains
+            print('==================================================') 
+            rolly = input().lower()
+            if rolly == 'roll': # rolling the 'dice'
+                dicerollnoise()
+                roll()
+                roll()
+                roll()
+                braintotallist[i] = braintotallist[i] + brainnum # adding everything to totallists
+                shotguntotallist[i] = shotguntotallist[i] + shotgunnum  
+                runnertotallist[i] = shotguntotallist[i] + runnernum
+            elif rolly == 'win':
+                brainlist[i] = brainlist[i] +13
+            elif rolly == 'bank': # elif statements so that if the player banks it add it to
+                brainlist[i] = brainlist[i] + brainnum # getting the number of brains the user has added to their total
+                shotgunlist[i] = shotgunlist[i] + shotgunnum
+                coins()
+                truefactor = False
+                print('PLAYER', i + 1, "HAS", brainlist[i], "BANKED BRAINS\n")
+                if brainlist[i] >= 13: # if a the player has 13 or more brains after they bank
+                    zombiegroan()    
+                    truefactor = False # they win
+                    totaltrue = False
+                    game = 'done'
+                    print("LOOKS LIKE PLAYER", i +1, 'HAS', brainlist[i], 'BRAINS...')
+                    print('THE ROUND WILL FINISH AFTER THE LAST PLAYER BANKS...')
+                    print("IF YOU STILL HAVE A TURN YOU BETTER WIN SOON...")
+                    time.sleep(2)
+                    winloop = True
+                    winnernumtocheck = brainlist[i]
+                    evillaugh()
+                    break
+                break
+            elif rolly == 'bank?': # all the other options the user can type in
+                print('PLAYER', i + 1, 'HAS', brainlist[i], 'BRAINS IN THERE BANK\n')
+            elif rolly == 'instructions':
+                instructions()
+            elif rolly == 'end music':
+                endmusic()
+            else:
+                print('\nPLEASE ENTER roll, bank, bank?, instructions, or end music not', rolly, '...\n')
+            if shotgunnum >= 3:
+                truefactor = False
+                shotgunlist[i] = shotgunnum + shotgunlist[i]
+                print("\nYOU'RE TOO GREEDY... THE HUMANS HAVE GOTTEN YOU THIS"
+                      " TIME DO BETTER NEXT TIME, NO BRAINS THIS TIME...")
+                shotgunnoise()
+                print('\nPLAYER', i + 1, "HAS", brainlist[i], "BANKED BRAINS")
+                break
+            print("\nYOU HAVE", brainnum, 'BRAIN(S)')
+            print('YOU HAVE', shotgunnum, 'SHOTGUN(S)') # print statements for ease of access
+            print('YOU HAVE', runnernum, 'RUNNER(S)') # for the user
+            runnernum = 0
+            print('\n==================================================')
+            print("TYPE bank IF YOU WANT ALL YOUR BRAINS TO COUNT"
+                  " (or if you want your turn to end)")
+            print("TYPE bank? IF YOU WOULD LIKE TO SEE HOW MANY BRAINS YOU HAVE"
+                  " IN THE BANK")
+            print('TYPE instructions IF YOU WOULD LIKE TO SEE THE RULES AGAIN')
+            print('TYPE end music IF YOU WOULD LIKE THE MUSIC TO STOP PLAYING')
+    aitrue = True
+    while aitrue: # all this code is the same as the human one, just with ai variable names
+        for c in range(aiamount):
+            print('\n==================================================')
+            print("\nIT IS AI {}'S TURN NOW\n".format(c + 1))
+            print('AI', c+1,'HAS',brainlist[c + playernum],'BRAINS' )
+            print("AI WOULD YOU LIKE TO roll OR bank")
+            print('\n==================================================')
+            brainnum = 0
+            shotgunnum = 0
+            runnernum = 0
+            truefactorai = True
+            while truefactorai:
+                time.sleep(3)
+                if shotgunnum == 0:
+                    x = random.choice(aianswernone)
+                elif shotgunnum == 1:
+                    x = random.choice(aianswerone)
+                elif shotgunnum == 2:
+                    x = random.choice(aianswertwo)
+                print(x)
+                print('\n==================================================')
+                if x == 'roll': # rolling the 'dice'
+                    print('\n')
+                    dicerollnoise()
+                    time.sleep(1)
+                    roll()
+                    roll()
+                    roll()
+                    braintotallist[c+playernum] = braintotallist[c+playernum] + brainnum
+                    shotguntotallist[c+playernum] = shotguntotallist[c+playernum] + shotgunnum
+                    runnertotallist[c+playernum] = runnertotallist[c+playernum] + runnernum
+                    print('\n')
+                elif x == 'bank': # elif statements so that if the player banks it add it to
+                    coins()    
+                    time.sleep(2.5)
+                    brainlist[c + playernum] = brainlist[c + playernum] + brainnum # the player total
+                    shotgunlist[c + playernum] = shotgunlist[c + playernum] + shotgunnum
+                    truefactorai = False
+                    print('\nAI', c + 1, "HAS", brainlist[c + playernum], "BANKED BRAINS")
+                    if brainlist[c + playernum] >= 13: # if a the player has 13 or more brains after they bank
+                        zombiegroan()    
+                        truefactor = False # they win
+                        totaltrue = False
+                        game = 'done'
+                        print("AI", c +1, 'HAS', brainlist[c + playernum], 'BRAINS...')
+                        winloop = True
+                        winnernumtocheck = brainlist[i]
+                        break
+                    break
+                if shotgunnum >= 3:
+                    truefactor = False
+                    shotgunlist[c + playernum] = shotgunnum + shotgunlist[c + playernum]
+                    print("YOU'RE TOO GREEDY... THE HUMANS HAVE GOTTEN YOU THIS"
+                          " TIME DO BETTER NEXT TIME, NO BRAINS THIS TIME...")
+                    shotgunnoise()
+                    print('\nAI', c + 1, "HAS", brainlist[c + playernum], "BANKED BRAINS")
+                    print('\n==================================================')
+                    break
+                print("AI", c +1,"HAS", brainnum, 'BRAINS')
+                print('AI', c+ 1, 'HAS', shotgunnum, 'SHOTGUNS') # print statements for ease of access
+                print('AI', c + 1,'HAS', runnernum, 'RUNNERS') # for the user
+                runnernum = 0
+                print("\nAI TYPE bank IF YOU WANT ALL YOUR BRAINS TO COUNT")
+                print('AI TYPE roll TO ROLL THE DICE')
+        count += 1
+        aitrue = False
+        
+for i in range(len(brainlist)): # when a player wins their brain count is set to the variable winnernumtocheck
+    if brainlist[i] >= winnernumtocheck : # this for loop runs through all the brainlist nums and sees if anyone has more 
+        winningamount = brainlist[i] # brains than the origional number and a winner
+        winningplayer = i # is found 
+        
+if winningplayer <= playernum: # a if statement to print if a player wins
+    print("\nPLAYER", winningplayer + 1, 'HAS WON THE GAME WITH', winningamount)
+elif winningplayer > playernum: # an elif statement if an ai wins
+    print('AI', winningplayer + 1,' HAS WON THE GAME WITH', winningamount)
+print('... AND IT ONLY TOOK YOU', count,'TURNS. TOOK YOU LONG ENOUGH...') 
+datamaker() # making the data into DataFrames
+graph() # makes the final graph
+endmusic() # ends the music 
